@@ -1,2 +1,3 @@
 # Désactiver les erreurs concernant les espaces avant la ponctuation française
-Suppress 26
+DisableWarnings {26}
+
