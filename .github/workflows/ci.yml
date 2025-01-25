@@ -22,7 +22,11 @@ jobs:
           extra_system_packages: |
             texlive-latex-extra 
             texlive-fonts-extra
+            texlive-fonts-recommended
             cm-super
+            texlive-font-utils
+            fonts-urw-base35
+            ghostscript
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
