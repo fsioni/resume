@@ -1,22 +1,32 @@
 \documentclass{article}
+
+% Support des caractères français
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}  % Ajout pour le support des caractères français
+\usepackage[french]{babel}  % Support de la langue française
+
 \usepackage{template/bubblecv}
 \usepackage{lmodern}
-\usepackage{xcolor}
 \usepackage{helvet}
+
 % Définition d'une couleur bleue professionnelle
 \definecolor{cvcolor}{RGB}{41, 128, 185}
 \definecolor{cvbordercolor}{RGB}{255, 255, 255}
+
 % Configuration des polices
 \renewcommand\cvfont{lmss}
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand\cvheadertitlefontscale{2.5}
 \renewcommand\cvsectionfontscale{1.8}
 \renewcommand{\cveventdatewidth}{20}
+
 % Configuration de l'avatar
 \renewcommand\cvavatarradius{25}  % Augmentons légèrement le rayon
+
 % Ajustement des espacements
 \renewcommand{\cvseparatorspace}{1.5}
 \renewcommand{\cvitemspace}{2}
+
 \begin{document}
 \begin{cv}[profile][1.9]
 {Farès SIONI}{Chef de Projet \& Développeur Fullstack}
