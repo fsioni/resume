@@ -1,45 +1,28 @@
-name: CI - LaTeX Build & Check
-
-on:
-  push:
-    paths:
-      - '**.tex'
-  pull_request:
-    paths:
-      - '**.tex'
+name: Build LaTeX
+on: [push]
 
 jobs:
   build:
-    name: Build and Check LaTeX
     runs-on: ubuntu-latest
+    env:
+      DIR: .
+      FILE: main
 
     steps:
-      - name: Checkout repository
+      - name: Set up Git repository
         uses: actions/checkout@v4
 
-      - name: Cache TeX Live
-        uses: actions/cache@v4
+      - name: Build LaTeX document
+        uses: dante-ev/latex-action@latest
         with:
-          path: /tmp/texlive
-          key: cache-texlive-${{ runner.os }}-${{ hashFiles('**/*.tex') }}
+          root_file: ${{ env.FILE }}.tex
+          working_directory: ${{ env.DIR }}
 
-      - name: Install TeX Live and chktex
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra chktex
+      - name: Prepare artifacts
+        run: mkdir -p github_artifacts && mv ${{ env.DIR }}/${{ env.FILE }}.pdf ./github_artifacts/
 
-      - name: Check LaTeX syntax
-        continue-on-error: true
-        run: |
-          chktex -n1 -n8 -n26 main.tex || echo "Warnings found but continuing..."
-
-      - name: Build PDF
-        run: |
-          pdflatex -interaction=nonstopmode main.tex
-          pdflatex -interaction=nonstopmode main.tex
-
-      - name: Upload PDF
+      - name: Upload PDF as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: CV
-          path: main.pdf
+          name: ${{ env.FILE }}.pdf
+          path: ./github_artifacts
