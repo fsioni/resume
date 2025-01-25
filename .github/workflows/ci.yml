@@ -33,7 +33,7 @@ jobs:
       - name: Check LaTeX syntax
         continue-on-error: true
         run: |
-          chktex -n .chktexrc main.tex || echo "Warnings found but continuing..."
+          chktex -W26,8,1 main.tex || echo "Warnings found but continuing..."
 
       - name: Build PDF
         run: |
