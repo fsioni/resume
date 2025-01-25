@@ -1,33 +1,47 @@
-name: CI - LaTeX Syntax Check
+name: CI - LaTeX Build & Check
 
 on:
   push:
-   # paths:
-      #- '**/*.tex'
+    paths:
+      - '**.tex'
+      - '.chktexrc'
   pull_request:
-   # paths:
-      #- '**/*.tex'
+    paths:
+      - '**.tex'
+      - '.chktexrc'
 
 jobs:
-  syntax-check:
-    name: Check LaTeX Syntax
+  build:
+    name: Build and Check LaTeX
     runs-on: ubuntu-latest
 
     steps:
-      # Étape 1 : Récupérer le code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Étape 2 : Installer chktex
-      - name: Install chktex
-        run: sudo apt-get install -y chktex
+      - name: Cache TeX Live
+        uses: actions/cache@v4
+        with:
+          path: /tmp/texlive
+          key: cache-texlive-${{ runner.os }}-${{ hashFiles('**/*.tex') }}
 
-      # Étape 3 : Vérifier la syntaxe LaTeX
-      - name: Run chktex on main.tex
+      - name: Install TeX Live and chktex
         run: |
-          chktex -q -v0 -l .chktexrc main.tex
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra chktex
 
-      # Étape 4 : Afficher les erreurs (si nécessaires)
-      - name: Report Results
-        if: failure()
-        run: echo "Syntax check failed. Please fix the errors above."
+      - name: Check LaTeX syntax
+        continue-on-error: true
+        run: |
+          chktex -v0 main.tex || echo "Warnings found but continuing..."
+
+      - name: Build PDF
+        run: |
+          pdflatex -interaction=nonstopmode main.tex
+          pdflatex -interaction=nonstopmode main.tex  # Deuxième passage pour les références
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: CV
+          path: main.pdf

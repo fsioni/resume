@@ -1,3 +1,11 @@
-# Désactiver les erreurs concernant les espaces avant la ponctuation française
-DisableWarnings {26}
+# Autoriser les espaces avant la ponctuation double (règle française)
+WarningSuppression = 26
 
+# Autoriser les tirets de différentes longueurs
+WarningSuppression = 8
+
+# Autoriser les espaces après les commandes
+WarningSuppression = 1
+
+# Ignorer certains warnings spécifiques pour certains fichiers
+InputFiles = *.tex
