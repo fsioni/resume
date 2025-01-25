@@ -1,11 +1,11 @@
-# Autoriser les espaces avant la ponctuation double (règle française)
-WarningSuppression = 26
+# Désactiver les warnings pour les espaces avant la ponctuation
+Warning 26 = off
 
-# Autoriser les tirets de différentes longueurs
-WarningSuppression = 8
+# Désactiver les warnings pour les tirets
+Warning 8 = off
 
-# Autoriser les espaces après les commandes
-WarningSuppression = 1
+# Désactiver les warnings pour les espaces après les commandes
+Warning 1 = off
 
-# Ignorer certains warnings spécifiques pour certains fichiers
-InputFiles = *.tex
+# Silencer
+Silent = on
