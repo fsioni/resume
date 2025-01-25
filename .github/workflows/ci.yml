@@ -1,0 +1,33 @@
+name: CI - LaTeX Syntax Check
+
+on:
+  push:
+    paths:
+      - '**/*.tex'
+  pull_request:
+    paths:
+      - '**/*.tex'
+
+jobs:
+  syntax-check:
+    name: Check LaTeX Syntax
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Récupérer le code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Étape 2 : Installer chktex
+      - name: Install chktex
+        run: sudo apt-get install -y chktex
+
+      # Étape 3 : Vérifier la syntaxe LaTeX
+      - name: Run chktex on main.tex
+        run: |
+          chktex -q -v0 main.tex
+
+      # Étape 4 : Afficher les erreurs (si nécessaires)
+      - name: Report Results
+        if: failure()
+        run: echo "Syntax check failed. Please fix the errors above."
