@@ -14,11 +14,15 @@ jobs:
       - name: Install dependencies
         run: |
           apt-get update
-          apt-get install -y latexmk
-
-      - name: Verify TeXLive version
-        run: |
-          pdflatex --version
+          apt-get install -y \
+            latexmk \
+            texlive-lang-french \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-latex-extra \
+            texlive-xetex \
+            fonts-lmodern \
+            ghostscript
 
       - name: Build LaTeX
         run: |
