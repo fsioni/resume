@@ -25,7 +25,7 @@ jobs:
       # Étape 3 : Vérifier la syntaxe LaTeX
       - name: Run chktex on main.tex
         run: |
-          chktex -q -v0 main.tex
+          chktex -q -v0 -l .chktexrc main.tex
 
       # Étape 4 : Afficher les erreurs (si nécessaires)
       - name: Report Results
