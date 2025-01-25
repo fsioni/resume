@@ -2,11 +2,11 @@ name: CI - LaTeX Syntax Check
 
 on:
   push:
-    paths:
-      - '**/*.tex'
+   # paths:
+      #- '**/*.tex'
   pull_request:
-    paths:
-      - '**/*.tex'
+   # paths:
+      #- '**/*.tex'
 
 jobs:
   syntax-check:
