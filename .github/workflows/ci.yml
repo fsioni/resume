@@ -1,5 +1,10 @@
-name: Build LaTeX
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,10 +18,25 @@ jobs:
 
       - name: Build LaTeX
         run: |
-          latexmk -pdf main.tex
+          mkdir -p output
+          latexmk -pdf -output-directory=output main.tex
 
-      - name: Upload PDF
+      - name: Upload PDF (Artifact)
         uses: actions/upload-artifact@v4
         with:
           name: CV
-          path: main.pdf
+          path: output/main.pdf
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/deploy-pages@v4
+        with:
+          folder: output
+
+      - name: Notify Discord
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "📄 Nouveau CV généré avec succès ! [Lien direct](https://<ton-username>.github.io/<nom-du-projet>/main.pdf)"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+
