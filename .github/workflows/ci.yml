@@ -5,24 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: registry.gitlab.com/islandoftex/images/texlive:latest-basic
+      image: registry.gitlab.com/islandoftex/images/texlive:latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: |
-          apt-get update
-          apt-get install -y \
-            latexmk \
-            texlive-lang-french \
-            texlive-fonts-recommended \
-            texlive-fonts-extra \
-            texlive-latex-extra \
-            texlive-xetex \
-            fonts-lmodern \
-            ghostscript
 
       - name: Build LaTeX
         run: |
