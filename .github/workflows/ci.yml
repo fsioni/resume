@@ -33,10 +33,10 @@ jobs:
         with:
           folder: output
 
-      - name: Notify Discord
+      - name: Discord notification
         if: success()
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "📄 Nouveau CV généré avec succès ! [Lien direct](https://<ton-username>.github.io/<nom-du-projet>/main.pdf)"}' \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
-
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '📄 Nouveau CV généré avec succès ! [Lien direct](https://fsioni.github.io/resume/main.pdf)"'
