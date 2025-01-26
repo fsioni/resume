@@ -1,0 +1,42 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.com/islandoftex/images/texlive:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build LaTeX
+        run: |
+          mkdir -p output
+          latexmk -pdf -output-directory=output main.tex
+
+      - name: Upload PDF (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: CV
+          path: output/main.pdf
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/deploy-pages@v4
+        with:
+          folder: output
+
+      - name: Discord notification
+        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '📄 Nouveau CV généré avec succès ! [Lien direct](https://fsioni.github.io/resume/main.pdf)"'
