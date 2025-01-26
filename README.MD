@@ -1,5 +1,8 @@
 # SIONI Farès Automatic Resume
 
+[![Latest CV](https://img.shields.io/badge/CV-latest-blue)](https://fsioni.github.io/resume/main.pdf)
+
+
 ## Description
 This project automates the generation and versioning of my resume using LaTeX.
 
