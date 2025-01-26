@@ -27,16 +27,33 @@ jobs:
           name: CV
           path: output/main.pdf
 
-      - name: Deploy to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/deploy-pages@v4
+      - name: Upload for Pages deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: output
+          path: output
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Discord notification
-        if: success()
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && success()
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: '📄 Nouveau CV généré avec succès ! [Lien direct](https://fsioni.github.io/resume/main.pdf)"'
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "📄 Nouveau CV généré avec succès ! [Lien direct](https://${{ steps.deployment.outputs.page_url }}/main.pdf)"}' \
+          $DISCORD_WEBHOOK
