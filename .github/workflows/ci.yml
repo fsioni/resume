@@ -64,5 +64,5 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "📄 Nouveau CV généré avec succès ! [Lien direct](https://${{ steps.deployment.outputs.page_url }}main.pdf)"}' \
+          -d '{"content": "📄 Nouveau CV généré avec succès ! [Lien direct](${{ steps.deployment.outputs.page_url }}main.pdf)"}' \
           $DISCORD_WEBHOOK
