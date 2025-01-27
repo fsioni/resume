@@ -1,7 +1,7 @@
 # Build stage
 FROM registry.gitlab.com/islandoftex/images/texlive:latest as builder
 WORKDIR /app
-COPY cv/ .
+COPY resume/ .
 RUN mkdir -p output && \
     latexmk -pdf -output-directory=output main.tex
 
