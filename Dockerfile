@@ -1,9 +1,10 @@
+# Build stage
 FROM registry.gitlab.com/islandoftex/images/texlive:latest as builder
 WORKDIR /app
-COPY . .
+COPY cv/ .
 RUN mkdir -p output && \
     latexmk -pdf -output-directory=output main.tex
 
-# Serve stage
+# Production stage
 FROM nginx:alpine
-COPY --from=builder /app/output /usr/share/nginx/html
+COPY --from=builder /app/output/main.pdf /usr/share/nginx/html/pdf/cv.pdf
