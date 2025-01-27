@@ -2,9 +2,17 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '**.tex'
+      - 'template/**.sty'
+      - 'resources/**.png'
   pull_request:
     branches:
       - main
+    paths:
+      - '**.tex'
+      - 'template/**.sty'
+      - 'resources/**.png'
 
 jobs:
   build:
@@ -28,6 +36,7 @@ jobs:
           path: output/main.pdf
 
       - name: Upload for Pages deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: output
@@ -43,6 +52,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       pages: write
       id-token: write
@@ -59,7 +69,6 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Discord notification
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && success()
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
