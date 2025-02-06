@@ -14,6 +14,9 @@ ENV LANGUAGE=fr_FR.UTF-8
 # Copier les fichiers
 COPY . .
 
+# Créer un lien symbolique pour le dossier resources
+RUN cd resume && ln -s resources .
+
 # Génération du PDF
 RUN cd resume && \
     mkdir -p output && \
