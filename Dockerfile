@@ -17,9 +17,9 @@ COPY . .
 # Se placer dans le répertoire resume
 WORKDIR /app/resume
 
-# Génération du PDF avec plus de debug
+# Génération du PDF avec mode interactif
 RUN mkdir -p output && \
-    pdflatex -halt-on-error -file-line-error -output-directory=output main.tex
+    pdflatex -file-line-error -output-directory=output main.tex
 
 # Production stage
 FROM nginx:alpine
