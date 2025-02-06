@@ -14,29 +14,18 @@ ENV LANGUAGE=fr_FR.UTF-8
 # Copier les fichiers
 COPY . .
 
-# Vérification et conversion des encodages si nécessaire
-RUN for file in $(find . -name "*.tex" -o -name "*.sty"); do \
-    if [ "$(file -b --mime-encoding "$file")" != "utf-8" ]; then \
-        echo "Converting $file to UTF-8"; \
-        iconv -f ASCII -t UTF-8 "$file" > "$file.utf8" && mv "$file.utf8" "$file"; \
-    fi \
-    done
-
-# Vérification des encodages après conversion
-RUN find . -name "*.tex" -o -name "*.sty" | xargs file
+# Debug : afficher l'encodage des fichiers
+RUN echo "=== Encodage des fichiers ===" && \
+    find . -name "*.tex" -o -name "*.sty" | xargs file
 
 # Génération du PDF
 RUN cd resume && \
     mkdir -p output && \
-    latexmk -pdf -interaction=nonstopmode -output-directory=output main.tex
+    latexmk -pdf -verbose -interaction=nonstopmode -output-directory=output main.tex
 
 # Production stage
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
-
-# Copier le PDF généré
 COPY --from=builder /app/resume/output/main.pdf ./cv.pdf
-
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
