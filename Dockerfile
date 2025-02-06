@@ -25,7 +25,7 @@ WORKDIR /app/resume
 
 # Génération du PDF avec mode diagnostic
 RUN mkdir -p output && \
-    TEXINPUTS=".:" pdflatex -diagnostic -output-directory=output main.tex
+    TEXINPUTS=".:" pdflatex -output-directory=output main.tex
 
 # Production stage
 FROM nginx:alpine
