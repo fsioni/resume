@@ -1,5 +1,5 @@
 # Build stage
-FROM registry.gitlab.com/islandoftex/images/texlive:latest as builder
+FROM registry.gitlab.com/islandoftex/images/texlive@sha256:c145e9c620c054df1e5c885c588b081b200707f151bf7a6693a591cc364d60ad as builder
 WORKDIR /app
 
 # Installation des outils nécessaires
