@@ -31,5 +31,5 @@ RUN mkdir -p output && \
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 COPY --from=builder /app/resume/output/main.pdf ./cv.pdf
-EXPOSE 80
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
