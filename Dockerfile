@@ -1,10 +1,10 @@
 # Build stage
-FROM registry.gitlab.com/islandoftex/images/texlive@sha256:c145e9c620c054df1e5c885c588b081b200707f151bf7a6693a591cc364d60ad as builder
+FROM texlive/texlive:latest as builder
 WORKDIR /app
 
-# Installation des outils nécessaires et des polices
+# Installation des outils nécessaires
 RUN apt-get update && \
-    apt-get install -y locales texlive-fonts-extra && \
+    apt-get install -y locales && \
     sed -i 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
 ENV LANG=fr_FR.UTF-8
@@ -14,11 +14,12 @@ ENV LANGUAGE=fr_FR.UTF-8
 # Copier les fichiers
 COPY . .
 
+# Se placer dans le répertoire resume
 WORKDIR /app/resume
 
-# Génération du PDF
+# Génération du PDF avec plus de debug
 RUN mkdir -p output && \
-    latexmk -pdf -interaction=nonstopmode -output-directory=output main.tex
+    pdflatex -halt-on-error -file-line-error -output-directory=output main.tex
 
 # Production stage
 FROM nginx:alpine
