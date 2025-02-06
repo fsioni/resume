@@ -14,12 +14,18 @@ ENV LANGUAGE=fr_FR.UTF-8
 # Copier les fichiers
 COPY . .
 
+# Créer un fichier de configuration LaTeX
+RUN echo '$pdflatex = "pdflatex -file-line-error -synctex=1 -interaction=nonstopmode %O %S";' > .latexmkrc && \
+    echo '$pdf_mode = 1;' >> .latexmkrc && \
+    echo '$max_repeat = 5;' >> .latexmkrc && \
+    echo '$clean_ext = "synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk run tdo pdfsync out aux";' >> .latexmkrc
+
 # Se placer dans le répertoire resume
 WORKDIR /app/resume
 
-# Génération du PDF avec mode interactif
+# Génération du PDF avec mode diagnostic
 RUN mkdir -p output && \
-    pdflatex -file-line-error -output-directory=output main.tex
+    TEXINPUTS=".:" pdflatex -diagnostic -output-directory=output main.tex
 
 # Production stage
 FROM nginx:alpine
