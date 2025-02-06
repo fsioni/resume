@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Installation des outils nécessaires
 RUN apt-get update && \
-    apt-get install -y locales file iconv && \
+    apt-get install -y locales file && \
     sed -i 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
 ENV LANG=fr_FR.UTF-8
@@ -14,9 +14,10 @@ ENV LANGUAGE=fr_FR.UTF-8
 # Copier les fichiers
 COPY . .
 
-# Conversion de tous les fichiers en UTF-8
-RUN find . -name "*.tex" -o -name "*.sty" | while read file; do \
+# Vérification et conversion des encodages si nécessaire
+RUN for file in $(find . -name "*.tex" -o -name "*.sty"); do \
     if [ "$(file -b --mime-encoding "$file")" != "utf-8" ]; then \
+        echo "Converting $file to UTF-8"; \
         iconv -f ASCII -t UTF-8 "$file" > "$file.utf8" && mv "$file.utf8" "$file"; \
     fi \
     done
