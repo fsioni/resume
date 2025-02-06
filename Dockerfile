@@ -14,8 +14,8 @@ ENV LANGUAGE=fr_FR.UTF-8
 # Copier les fichiers
 COPY . .
 
-# Créer un lien symbolique pour le dossier resources
-RUN cd resume && ln -s resources .
+# Modifions le chemin des ressources directement dans le fichier tex
+RUN sed -i 's#resources/#resume/resources/#g' resume/main.tex
 
 # Génération du PDF
 RUN cd resume && \
