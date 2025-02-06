@@ -17,9 +17,7 @@ COPY . .
 # Génération du PDF
 RUN cd resume && \
     mkdir -p output && \
-    pdflatex -interaction=nonstopmode -output-directory=output \
-    -file-line-error -halt-on-error \
-    '\input{main.tex}'
+    latexmk -pdf -interaction=nonstopmode -output-directory=output main.tex
 
 # Production stage
 FROM nginx:alpine
