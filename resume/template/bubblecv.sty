@@ -81,7 +81,7 @@
 %----------------------------------------------------------------------------------------
 % COLORS
 %----------------------------------------------------------------------------------------
-\usepackage{xcolor}
+\RequirePackage{xcolor}
 \definecolor{cvcolor}{RGB}{20, 20, 20}                      % main color
 \definecolor{cvbordercolor}{RGB}{255, 255, 255}             % border color
 \definecolor{cvavatarbordercolor}{RGB}{255, 255, 255}       % avatar border color
@@ -95,7 +95,7 @@
 %----------------------------------------------------------------------------------------
 % RESCALE
 %----------------------------------------------------------------------------------------
-\usepackage{fp}
+\RequirePackage{fp}
 \FPeval{\cvavatarradius}{\cvscale*\cvavatarradius}
 \FPeval{\cvavatarborderwidth}{\cvscale*\cvavatarborderwidth}
 \FPeval{\cvmainspace}{\cvscale*\cvmainspace}
@@ -114,37 +114,37 @@
 %----------------------------------------------------------------------------------------
 \newcommand\packagename{bubblecv}
 
-\usepackage[a4paper]{geometry}
+\RequirePackage[a4paper]{geometry}
 \geometry{top=\cvtopmargin mm, bottom=\cvbottommargin mm, left=\cvleftmargin mm, right=\cvrightmargin mm}
 
 \setlength{\topskip}{0mm}                                   % no top margin default
 \setlength{\parindent}{0mm}                                 % no indent default
 \pagenumbering{gobble}                                      % disable page numbering
 
-\usepackage{enumitem}
+\RequirePackage{enumitem}
 \setlist[itemize]{noitemsep, nolistsep, leftmargin=*}       % default list style
 
 %----------------------------------------------------------------------------------------
 % COMMON PACKAGES
 %----------------------------------------------------------------------------------------
-\usepackage[utf8]{inputenc}  % for utf-8 encoding
-\usepackage{xparse}          % new document command
-\usepackage{ifthen}          % if then else
-\usepackage{tabularx}        % tabular for progress bar
-\usepackage{hyperref}        % hyper ref
+\RequirePackage[utf8]{inputenc}  % for utf-8 encoding
+\RequirePackage{xparse}          % new document command
+\RequirePackage{ifthen}          % if then else
+\RequirePackage{tabularx}        % tabular for progress bar
+\RequirePackage{hyperref}        % hyper ref
 
 %----------------------------------------------------------------------------------------
 % COLUMNS
 %----------------------------------------------------------------------------------------
-\usepackage{paracol}
+\RequirePackage{paracol}
 \setlength{\columnsep}{\cvspacebetweencolumns mm}       % space between columns
 \newcommand\iscvsidebar{0}                              % flag if sidebar is active
 
 %----------------------------------------------------------------------------------------
 % FONTS & ICONS
 %----------------------------------------------------------------------------------------
-\usepackage{relsize}        % for font scaling
-\usepackage{fontawesome}
+\RequirePackage{relsize}        % for font scaling
+\RequirePackage{fontawesome}
 % allow icons to scale
 \DeclareFontFamily{U}{fontawesomeOne}{}
 \DeclareFontShape{U}{fontawesomeOne}{m}{n}{<-> FontAwesome--fontawesomeone}{}
@@ -153,9 +153,9 @@
 %----------------------------------------------------------------------------------------
 % TIMELINE
 %----------------------------------------------------------------------------------------
-\usepackage{silence}
+\RequirePackage{silence}
 \WarningsOff[everypage]         % disable warning about problems with background package
-\usepackage{background}
+\RequirePackage{background}
 \SetBgScale{1}
 \SetBgAngle{0}
 \SetBgColor{cvtimelinecolor}
