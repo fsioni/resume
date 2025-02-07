@@ -1,0 +1,51 @@
+name: Build and Deploy CV
+on:
+  push:
+    branches: ["main"]
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build PDF
+        uses: docker://texlive/texlive:latest
+        with:
+          args: |
+            sh -c "apt-get update && \
+                  apt-get install -y locales && \
+                  sed -i 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen && \
+                  locale-gen && \
+                  export LANG=fr_FR.UTF-8 && \
+                  export LC_ALL=fr_FR.UTF-8 && \
+                  export LANGUAGE=fr_FR.UTF-8 && \
+                  cd resume && \
+                  pdflatex -file-line-error -interaction=nonstopmode main.tex && \
+                  pdflatex -file-line-error -interaction=nonstopmode main.tex"
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image and push to registry
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
