@@ -45,6 +45,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            GITHUB_REPOSITORY=${{ github.repository }}
 
       - name: Deploy to Coolify
         run: |
