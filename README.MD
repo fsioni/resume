@@ -1,6 +1,6 @@
 # SIONI Farès Automatic Resume
 
-[![Latest CV](https://img.shields.io/badge/CV-latest-blue)](https://fsioni.github.io/resume/main.pdf)
+[![Latest CV](https://img.shields.io/badge/CV-latest-blue)](http://cv.fsioni.com/cv.pdf)
 
 
 ## Description
