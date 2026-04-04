@@ -1,198 +1,162 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[letterpaper,11pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[none]{hyphenat}
+\usepackage{hyphenat}
 
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
-% Support langue française
+% French language support
 \usepackage[french]{babel}
 
 \usepackage{template/bubblecv}
 
-% Définition d'une couleur bleue professionnelle
+% Override geometry for US letter
+\geometry{top=10mm, bottom=10mm, left=35mm, right=10mm}
+
+% Professional blue color definition
 \definecolor{cvcolor}{RGB}{41, 128, 185}
 \definecolor{cvbordercolor}{RGB}{255, 255, 255}
 
-% Configuration des polices
+% Font configuration
 \renewcommand\cvfont{lmss}
 \renewcommand{\familydefault}{\sfdefault}
 
-% Configuration de l'avatar
-\renewcommand\cvavatarradius{25}
+% Avatar configuration
+\renewcommand\cvavatarradius{22}
 
-% Ajustement des espacements
-\renewcommand{\cvseparatorspace}{1.5}
-\renewcommand{\cvitemspace}{2}
+% Spacing adjustments
+\renewcommand{\cvseparatorspace}{0.8}
+\renewcommand{\cvitemspace}{1}
+\renewcommand{\cvheadermargin}{3}
+\renewcommand{\cvtopmargin}{6}
+\renewcommand{\cvbottommargin}{6}
 
 \begin{document}
 \begin{cv}[profile][2]
-{Farès SIONI}{Chef de Projet \& Développeur Fullstack}
+{Far\`es SIONI}{Ing\'enieur Logiciel Fullstack}
 
     \cvsection[summary]{Profil}
-    Développeur Fullstack et Chef de Projet spécialisé dans la conception d'applications métier complexes.
-    Expérience en pilotage de projets stratégiques et gestion d'équipe.
-    Expertise en Node.js/TypeScript et Angular avec une approche qualité/performance.
-    Passionné par l'innovation technique au service des besoins métier.
+    Ing\'enieur Fullstack sp\'ecialis\'e TypeScript, NestJS et Angular avec 3 ans d'exp\'erience sur la refonte d'applications internes en production chez Enedis.
+    Pilotage technique en \'equipe r\'eduite, modernisation d'architectures et livraison de produits m\'etier \`a fort impact terrain.
 
-\cvsection[work]{Expérience Professionnelle}
-    \begin{cvevent}[11/2025][12/2025]
-        \cvname{Développeur Fullstack (CDD)}
-        \cvdescription{Enedis Lab, Lyon}
+\cvsection[work]{Exp\'erience Professionnelle}
+    \begin{cvevent}[11/2025][04/2026]
+        \cvname{Ing\'enieur Logiciel Fullstack. NestJS \& Angular}
+        \cvdescription{Enedis, Lyon, France}
         \begin{itemize}
-            \item Développement d'un outil de coordination des équipes terrain (NestJS, Angular, Prisma, Kafka).
-            \item Support technique et décisions architecturales pour une équipe d'alternants, revues de code et bonnes pratiques.
-            \item Conception de flux événementiels temps réel avec Kafka pour la synchronisation des données.
+            \item Refonte (v2) d'une plateforme interne de coordination terrain en NestJS/Angular avec synchronisation distribu\'ee multi-r\'egions, desservant des centaines d'utilisateurs.
+            \item Encadrement technique de l'\'equipe sur l'architecture syst\`eme, les standards de qualit\'e de code et les patterns de conception scalables.
+            \item Conception des flux de donn\'ees, \'evaluation de faisabilit\'e et validation par des tests de bout en bout.
         \end{itemize}
     \end{cvevent}
 
-\cvseparator[2]
+\cvseparator[1]
     \begin{cvevent}[08/2023][08/2025]
-        \cvname{Chef de Projet \& Développeur Fullstack (Alternance)}
-        \cvdescription{Enedis Lab, Lyon}
+        \cvname{Ing\'enieur Logiciel Fullstack. NestJS \& Angular}
+        \cvdescription{Enedis, Lyon, France}
         \begin{itemize}
-            \item Pilotage d'un projet RH national : coordination de 3 développeurs, développement fullstack (NestJS, Angular, Prisma) et gestion parties prenantes.
-            \item Architecture et intégration au SI Enedis (SSO), flux de données automatisés et présentation au COMEX.
-            \item Gestion Prince2/Agile avec GitLab. \textbf{Gain :} Réduction de 50\% du temps de traitement, 1 jour/mois économisé par direction (25+ régions).
+            \item Refonte (v2) d'une plateforme nationale de gestion RH en NestJS/Angular~: pilotage d'une \'equipe de 3 d\'eveloppeurs, cadrage technique et livraison en production.
+            \item Architecture d'int\'egrations entreprise incluant l'authentification SSO et l'orchestration de pipelines de donn\'ees~; pr\'esentation de propositions techniques \`a la direction.
+            \item Mise en place de suites de tests compl\`etes (E2E, int\'egration). \textbf{Impact~:} r\'eduction de 50\,\% du temps de traitement, \'economisant plus de 25 heures/mois sur 25 r\'egions.
         \end{itemize}
     \end{cvevent}
 
-\cvseparator[2]
+\cvseparator[1]
     \begin{cvevent}[06/2023][08/2023]
-        \cvname{Développeur Fullstack (Stage)}
-        \cvdescription{AXOPEN, Lyon}
+        \cvname{Ing\'enieur Logiciel Fullstack}
+        \cvdescription{AXOPEN, Lyon, France}
         \begin{itemize}
-            \item Optimisation d'agrégation statistique : réduction mémoire de 98\% (3772MB à 71.4MB).
-            \item Développement application desktop et dashboard web (WPF, .NET, Angular) avec authentification sécurisée.
-            \item Réduction dette technique : correction vulnérabilités (SonarQube), mise à jour frameworks.
+            \item Diagnostic et r\'esolution d'un goulot d'\'etranglement critique dans un pipeline de donn\'ees analytiques, r\'eduisant la consommation m\'emoire de 98\,\% (3,7\,Go $\rightarrow$ 71\,Mo).
+            \item Migration et mont\'ee de version Angular d'une application existante~; correction de vuln\'erabilit\'es de s\'ecurit\'e.
+            \item D\'eveloppement d'une application web avec couche d'authentification s\'ecuris\'ee.
         \end{itemize}
     \end{cvevent}
 
 \cvsection[education]{Formation}
 \begin{cvevent}[2023][2025]
-    \cvname{Master Technologies de l'Information et Web}
-    \cvdescription{Université Claude Bernard Lyon 1, Lyon}
+    \cvname{Master Informatique \& Technologies du Web}
+    \cvdescription{Universit\'e Claude Bernard Lyon 1, France}
     \begin{itemize}
-        \item Sécurité applicative, AWS Cloud Computing
-        \item DevOps \&Cloud : Kubernetes, Terraform, Ansible
-        \item Architecture des applications web et systèmes distribués
-        \item Intégration, analyse et gestion de grandes masses de données
+        \item Architecture de syst\`emes distribu\'es, Cloud Computing AWS
+        \item DevOps \& Infrastructure~: Kubernetes, Terraform, Ansible, Linux
+        \item Ing\'enierie des donn\'ees~: pipelines ETL, traitement de donn\'ees \`a grande \'echelle
+        \item S\'ecurit\'e applicative et optimisation des performances
     \end{itemize}
 \end{cvevent}
 
 \begin{cvevent}[2019][2023]
     \cvname{Licence Informatique}
-    \cvdescription{Université Claude Bernard Lyon 1, Lyon}
-    \textbf{Projet phare :} ColorBurst - Jeu multijoueur temps réel (React, TypeScript, Socket.io) - 18/20, major de promotion
+    \cvdescription{Universit\'e Claude Bernard Lyon 1, France}
 \end{cvevent}
 
 \cvsidebar
 
 \cvsection[contact]{Contact}
 \begin{cvitem}[Envelope][4]
-    \textbf{Email :}\\
+    \textbf{Email~:}\\
     \href{mailto:pro@fsioni.com}{pro@fsioni.com}
 \end{cvitem}
 
-\cvseparator[3]
+\cvseparator[2]
 \begin{cvitem}[Phone][4]
-    \textbf{ Téléphone :}\\
+    \textbf{T\'el\'ephone~:}\\
     \href{tel:+33695657884}
     {+33 6 95 65 78 84}
 \end{cvitem}
 
-\cvseparator[3]
+\cvseparator[2]
 \begin{cvitem}[Github][4]
-    \textbf{ GitHub :}\\
+    \textbf{GitHub~:}\\
     \href{https://github.com/fsioni}{github.com/fsioni}
 \end{cvitem}
 
-\cvseparator[3]
+\cvseparator[2]
 \begin{cvitem}[Linkedin][4]
-    \textbf{ LinkedIn :}\\
+    \textbf{LinkedIn~:}\\
     \href{https://linkedin.com/in/sionifareslor}{linkedin.com/in/sionifareslor}
 \end{cvitem}
 
-\cvsection[skills]{Compétences}
+\cvsection[skills]{Comp\'etences}
     \begin{cvitem}
-        \textbf{Technologies Frontend :} \\
-        Angular, React, JavaScript / TypeScript, \\
-        Interfaces UI/UX, Design Responsive
+        \textbf{Frontend~:} \\
+        Angular, TypeScript
     \end{cvitem}
 
-    \cvseparator[2]
+    \cvseparator[1]
     \begin{cvitem}
-        \textbf{Technologies Backend :} \\
-        NestJS, Node.js, Prisma, NextJS, .NET Core, \\
-        API RESTful, Flux de données
+        \textbf{Backend~:} \\
+        Node.js, NestJS, Express, \\
+        APIs REST, Prisma ORM
     \end{cvitem}
 
-    \cvseparator[2]
+    \cvseparator[1]
     \begin{cvitem}
-        \textbf{DevOps \& Outils :} \\
-        Docker, Git, CI/CD, GitLab, \\
-        SonarQube, Monitoring
+        \textbf{Donn\'ees \& Infrastructure~:} \\
+        PostgreSQL, AWS, Kubernetes, \\
+        Docker, Linux
     \end{cvitem}
 
-    \cvseparator[2]
+    \cvseparator[1]
     \begin{cvitem}
-        \textbf{Gestion de Projet :} \\
-        Méthodologies Prince2 et Agile, \\
-        Leadership technique, \\
-        Communication parties prenantes, \\
-        Analyse de besoins métier
-    \end{cvitem}
-
-    \cvseparator[2]
-    \begin{cvitem}
-        \textbf{Base de données :} \\
-        PostgreSQL, \\
-        Conception de schémas, ORM
+        \textbf{Qualit\'e \& DevOps~:} \\
+        CI/CD, Tests E2E \& Int\'egration, \\
+        SonarQube, Git, Terraform
     \end{cvitem}
 
 \cvsection[languages]{Langues}
 \begin{cvitem}
-    \textbf{Français :} Langue maternelle
+    \textbf{Fran\c{c}ais~:} Langue maternelle
 \end{cvitem}
 
 \cvseparator
 \begin{cvitem}
-    \textbf{Anglais :} Niveau professionnel
+    \textbf{Anglais~:} Courant (C2)
 \end{cvitem}
 
-\cvseparator
-\begin{cvitem}
-    \textbf{Espagnol :} Notions
-\end{cvitem}
-
-\cvsection[hobbies]{Centres d'intérêt}
-\begin{cvitem}
-    Création musicale
-\end{cvitem}
-
-\cvseparator
-\begin{cvitem}
-    Cinéma
-\end{cvitem}
-
-\cvseparator
-\begin{cvitem}
-    Voyage
-\end{cvitem}
-
-\cvseparator
-\begin{cvitem}
-    Running
-\end{cvitem}
-
-\cvseparator[12]
-\begin{cvitem}[Code][4]
-    \small{Ce CV a été réalisé en \LaTeX{} avec une pipeline CI/CD GitLab qui le compile automatiquement et le déploie sur \href{http://cv.fsioni.com}{cv.fsioni.com}. Le code source est disponible sur \href{https://github.com/fsioni/resume}{github.com/fsioni/resume}.}
-\end{cvitem}
 
 \end{cv}
 \end{document}
